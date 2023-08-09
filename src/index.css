@@ -33,10 +33,19 @@ code {
 }
 
 .btn {
-  font-size: 1em;
+  font-size: 1.2em;
   padding-left: 1em;
   padding-right: 1em;
   border-color: tomato;
   border-radius: 5px;
   cursor: pointer;
+}
+
+.btn.btn--add {
+  background-color: limegreen;
+}
+
+.btn.btn--subtract {
+  background-color: crimson;
+  color: white;
 }

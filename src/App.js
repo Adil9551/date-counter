@@ -15,6 +15,7 @@ function App() {
     const [count, setCount] = useState(5);
 
     const date = new Date();
+    date.setDate(date.getDate() + count);
 
     function handleStep(e) {
       if (step > 1 && e.target.dataset.operation === "subtract")
@@ -24,8 +25,7 @@ function App() {
     }
 
     function handleCount(e) {
-      if (count - step > 0 && e.target.dataset.operation === "subtract")
-        setCount((s) => s - step);
+      if (e.target.dataset.operation === "subtract") setCount((s) => s - step);
 
       if (e.target.dataset.operation === "add") setCount((s) => s + step);
     }
@@ -35,32 +35,44 @@ function App() {
         <div className="app--container">
           <button
             onClick={handleStep}
-            className="btn"
+            className="btn btn--subtract"
             data-operation="subtract"
           >
             -
           </button>
           <span>Step: {step}</span>
-          <button onClick={handleStep} className="btn" data-operation="add">
+          <button
+            onClick={handleStep}
+            className="btn btn--add"
+            data-operation="add"
+          >
             +
           </button>
         </div>
         <div className="app--container">
           <button
             onClick={handleCount}
-            className="btn"
+            className="btn btn--subtract"
             data-operation="subtract"
           >
             -
           </button>
           <span>Count: {count}</span>
-          <button onClick={handleCount} className="btn" data-operation="add">
+          <button
+            onClick={handleCount}
+            className="btn btn--add"
+            data-operation="add"
+          >
             +
           </button>
         </div>
         <div>
-          {count} days from today is{" "}
-          {new Date(date.setDate(date.getDate() + count)).toDateString()}
+          {count === 0
+            ? "Today is "
+            : count > 0
+            ? `${count} days from today is `
+            : `${Math.abs(count)} days ago was`}{" "}
+          <span>{date.toDateString()}</span>
         </div>
       </>
     );
